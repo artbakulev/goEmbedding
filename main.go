@@ -1,8 +1,11 @@
 package main
 
 import (
+	interfaceEmbedding "Embedding/interface"
 	"Embedding/struct"
 	"fmt"
+	_ "net/http/pprof"
+	"strconv"
 )
 
 func main() {
@@ -16,14 +19,29 @@ func main() {
 		Amplitude: 10,
 	}
 
-	button := struct_embedding.Button{Name: "Call Nikita"}
 	mobile := struct_embedding.Mobile{
 		Name:    "Iphone 11",
 		Display: display,
 		Radio:   radio,
-		Button:  button,
+		Button:  struct_embedding.Button{Name: "Call Nikita"},
 	}
 	CallPerson("Nikita", mobile)
+
+	// Вызов методов анонимных структур
+	IPad := struct {
+		Year int
+		struct_embedding.Display
+	}{
+		Year:    2019,
+		Display: display,
+	}
+	IPad.Show(strconv.Itoa(IPad.Year))
+
+	// Встраивание интерфейсов
+	truck := interfaceEmbedding.Truck{}
+	machine := interfaceEmbedding.NewMachine(truck)
+	machine.Beep()
+
 }
 
 func CallPerson(person string, mobile struct_embedding.Mobile) {

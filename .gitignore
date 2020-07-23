@@ -1,1 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/Embedding.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
